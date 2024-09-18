@@ -83,8 +83,6 @@ def login_user(request):
     context = {'form': form}
     return render(request, 'login.html', context)
 
-#pppp
-
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('main:login'))
