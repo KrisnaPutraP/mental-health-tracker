@@ -78,10 +78,12 @@ def login_user(request):
             response.set_cookie('last_login', str(datetime.datetime.now()))
             return response
 
-        else:
-            form = AuthenticationForm(request)
-            context = {'form': form}
-        return render(request, 'login.html', context)
+    else:
+        form = AuthenticationForm(request)
+    context = {'form': form}
+    return render(request, 'login.html', context)
+
+#pppp
 
 def logout_user(request):
     logout(request)
