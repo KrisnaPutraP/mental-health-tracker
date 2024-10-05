@@ -79,6 +79,19 @@
     </div>
 </div>
 <script>
+  function addMoodEntry() {
+    fetch("{% url 'main:add_mood_entry_ajax' %}", {
+      method: "POST",
+      body: new FormData(document.querySelector('#moodEntryForm')),
+    })
+    .then(response => refreshMoodEntries())
+
+    document.getElementById("moodEntryForm").reset(); 
+    document.querySelector("[data-modal-toggle='crudModal']").click();
+
+    return false;
+  }
+
   async function getMoodEntries(){
       return fetch("{% url 'main:show_json' %}").then((res) => res.json())
   }
@@ -185,18 +198,7 @@
 
   document.getElementById("cancelButton").addEventListener("click", hideModal);
   document.getElementById("closeModalBtn").addEventListener("click", hideModal);
-  function addMoodEntry() {
-    fetch("{% url 'main:add_mood_entry_ajax' %}", {
-      method: "POST",
-      body: new FormData(document.querySelector('#moodEntryForm')),
-    })
-    .then(response => refreshMoodEntries())
 
-    document.getElementById("moodEntryForm").reset(); 
-    document.querySelector("[data-modal-toggle='crudModal']").click();
-
-    return false;
-  }
   document.getElementById("moodEntryForm").addEventListener("submit", e => {
     e.preventDefault();
     addMoodEntry();
